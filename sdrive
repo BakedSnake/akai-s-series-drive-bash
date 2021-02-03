@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Paths
-drive= /dev/fd0
+drive=/dev/fd0
 
 # Functions
 prepDrive() {

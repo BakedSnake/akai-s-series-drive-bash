@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Paths
+drive= /dev/fd0
+
+# Functions
+prepDrive() {
+    echo 'preparing drive...'
+    setfdprm $drive sect=10 hd ssize=1024 cyl=80
+}
+
+formatDisk() {
+    echo 'formatting disk...'
+    superformat $drive sect=10 hd ssize=1024 cyl=80
+}
+
+iptImg() {
+    echo 'Enter the destination file path'
+    read iptloc
+    echo 'importing...'
+    cat $drive > $iptloc
+}
+
+writeDisk() {
+    echo 'Enter img path'
+    read iptimg
+    echo 'writting'
+    cat $iptimg > $drive
+}
+
+echo " 
+    ######################################
+    #   S-Series Drive :: Shell Script   #
+    ######################################
+
+          What would you like to do?
+          
+            1. Prepare drive
+            2. Format disk
+            3. Import img from disk
+            4. Write img to disk
+"
+
+read choice
+
+case "$choice" in
+    1) prepDrive ;;
+    2) formatDisk ;;
+    3) iptImg ;;
+    4) writeDisk ;;
+esac
+
